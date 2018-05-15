@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Un tour du Monde{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
+    {% endblock %}
+</head>
+<body>
+
+{% block navbar %} {% include('partial/nav.html.twig') %}{% endblock %}
+
+
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+    <script rel="stylesheet" href="{{ asset('js/jquery-3.3.1.min.js')}}"> </script>
+    <script rel="stylesheet" href="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
+{% endblock %}
+</body>
+</html>
