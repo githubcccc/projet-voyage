@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +23,16 @@ class Tag
      */
     private $tagname;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Voyage", inversedBy="tags")
+     */
+    private $voyage;
+
+    public function __construct()
+    {
+        $this->voyage = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -34,6 +46,32 @@ class Tag
     public function setTagname(string $tagname): self
     {
         $this->tagname = $tagname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Voyage[]
+     */
+    public function getVoyage(): Collection
+    {
+        return $this->voyage;
+    }
+
+    public function addVoyage(Voyage $voyage): self
+    {
+        if (!$this->voyage->contains($voyage)) {
+            $this->voyage[] = $voyage;
+        }
+
+        return $this;
+    }
+
+    public function removeVoyage(Voyage $voyage): self
+    {
+        if ($this->voyage->contains($voyage)) {
+            $this->voyage->removeElement($voyage);
+        }
 
         return $this;
     }

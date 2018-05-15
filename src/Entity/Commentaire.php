@@ -21,6 +21,12 @@ class Commentaire
      */
     private $commentairetext;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Voyage", inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $voyage;
+
     public function getId()
     {
         return $this->id;
@@ -34,6 +40,18 @@ class Commentaire
     public function setCommentairetext(string $commentairetext): self
     {
         $this->commentairetext = $commentairetext;
+
+        return $this;
+    }
+
+    public function getVoyage(): ?Voyage
+    {
+        return $this->voyage;
+    }
+
+    public function setVoyage(?Voyage $voyage): self
+    {
+        $this->voyage = $voyage;
 
         return $this;
     }
