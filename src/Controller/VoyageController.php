@@ -8,18 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 class VoyageController extends Controller {
     /**
-     * @Route("/voyage/ajout")
+     * @Route("/voyage/gestion/ajout")
      * @param Request $request
      * @return Response
      */
-    public function add(Request/*Type*/ $request):Response
+    public function add(Request/*Type*/ $request , UserInterface $user):Response
     {
         //récuperation du formulaire
         $voyage = new Voyage(); //contient un objet vide
@@ -30,10 +28,14 @@ class VoyageController extends Controller {
         //si le formulaire est valide => on ajoute la catégorie en BDD
         if($form->isSubmitted() && $form->isValid()){
             $voyage=$form->getData();//selection les données correspon dans product
+            $voyage->setUser($user);
             $manager =$this->getDoctrine()->getManager();
             $manager->persist($voyage);
+            //dump($voyage);
+            //dump($user);
+            //die("stop");
             $manager->flush();
-            return $this ->redirectToRoute('app_homepage');
+            return $this ->redirectToRoute('app_home_homepage');
         }
 
         //sinon on revoie une vue avec la formulaire

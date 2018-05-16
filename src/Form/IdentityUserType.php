@@ -15,8 +15,7 @@ class IdentityUserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('age')
-            ->add('mail')
-            ->add('user')
+            //->add('user')
         ;
     }
 

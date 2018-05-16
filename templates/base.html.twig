@@ -6,11 +6,24 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
     {% endblock %}
+
 </head>
 <body>
 
 {% block navbar %} {% include('partial/nav.html.twig') %}{% endblock %}
 
+{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
 
 {% block body %}{% endblock %}
 

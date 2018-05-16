@@ -2,41 +2,34 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as FOSParentUser;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="app_user")
  */
-class User
+class User extends FOSParentUser
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $pseudo;
-
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $password;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\IdentityUser", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $identityUser;
+    protected $identityUser;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Voyage", mappedBy="user", orphanRemoval=true)
      */
-    private $voyages;
+    protected $voyages;
 
     public function __construct()
     {
@@ -48,29 +41,7 @@ class User
         return $this->id;
     }
 
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
 
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     public function getIdentityUser(): ?IdentityUser
     {

@@ -32,11 +32,6 @@ class IdentityUser
     private $age;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $mail;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="identityUser", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -85,17 +80,6 @@ class IdentityUser
         return $this;
     }
 
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): self
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
