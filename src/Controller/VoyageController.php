@@ -42,7 +42,33 @@ class VoyageController extends Controller {
         ]);
     }
 
+    /**
+     * @Route("/show/{id}")
+     * @param Request $request
+     * @return Response
+     */
 
+    public function show(int $id):Response
+    {
+        $voyage=$this->getDoctrine()->getRepository(Voyage::class)->findOneWithCategory($id);
+
+        return $this->render("voyage/showvoyage.html.twig",[
+            "voyage"=>$voyage
+        ]);
+
+
+
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
 
 
 

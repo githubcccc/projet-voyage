@@ -32,6 +32,10 @@ class Tag
     {
         $this->voyage = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->tagname;
+    }
 
     public function getId()
     {

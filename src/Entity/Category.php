@@ -32,6 +32,10 @@ class Category
     {
         $this->voyages = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->continent;
+    }
 
     public function getId()
     {

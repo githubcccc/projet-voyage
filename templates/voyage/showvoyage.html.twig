@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+	{% block body %}
+        <main class = "container">
+            <h1>{{voyage.name}}
+                <span class ="badge badge-pill badge-info" >{{p=voyage.price}} €</span></h1>
+            <span class ="badge badge-pill badge-info" >{{voyage.category.continent}} </span></h1>
+            <p> {{voyage.description}}</p>
+        </main>
+    {% endblock %}

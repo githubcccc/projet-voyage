@@ -19,6 +19,23 @@ class VoyageRepository extends ServiceEntityRepository
         parent::__construct($registry, Voyage::class);
     }
 
+    public function findOneWithCategory(int $id): ?Voyage
+    {
+        $query =$this->createQueryBuilder('v')
+            ->join('v.category','c')
+            ->addSelect('c')
+            ->Where('c.id=:id')->setParameter(":id",$id)
+            ->getQuery()
+        ;
+        try{return $query->getOneOrNullResult();}
+
+        catch(\Exception $e){
+            throw new\Exception('probleme dans ProductRepository::findOneWithCategory'.$e->getMessage().
+                var_dump($e));
+        }
+
+    }
+
 //    /**
 //     * @return Voyage[] Returns an array of Voyage objects
 //     */

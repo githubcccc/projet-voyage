@@ -16,9 +16,9 @@ class VoyageType extends AbstractType
             ->add('time')
             ->add('price')
             ->add('description')
-            ->add('user',UserType::class)
+            //->add('user',UserType::class)
             ->add('tags')
-            ->add('category',CategoryType::class)
+            ->add('category')
         ;
     }
 
