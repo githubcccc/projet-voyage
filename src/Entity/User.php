@@ -31,8 +31,12 @@ class User extends FOSParentUser
      */
     protected $voyages;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
+        parent::__construct();
         $this->voyages = new ArrayCollection();
     }
 
@@ -90,4 +94,19 @@ class User extends FOSParentUser
 
         return $this;
     }
+
+    /**
+     * Place un rôle unique à l'utilisateur (supprimer tous les anciens rôles)
+     * @param string $userRole
+     */
+    public function setRole(string $userRole)
+    {
+        // Vider les rôles
+        foreach ($this->getRoles() as $role) {
+            $this->removeRole($role);
+        }
+        // Ajout le rôle unique passé en paramètre
+        $this->addRole($userRole);
+    }
+
 }

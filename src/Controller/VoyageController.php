@@ -24,10 +24,10 @@ class VoyageController extends Controller {
         $form = $this->createForm(VoyageType::class,$voyage);
 
         //vérification du formulaire
-        $form->handleRequest($request);//recuperer tous les donnees pour met dans form
+        $form->handleRequest($request);
         //si le formulaire est valide => on ajoute la catégorie en BDD
         if($form->isSubmitted() && $form->isValid()){
-            $voyage=$form->getData();//selection les données correspon dans product
+            $voyage=$form->getData();
             $voyage->setUser($user);
             $manager =$this->getDoctrine()->getManager();
             $manager->persist($voyage);

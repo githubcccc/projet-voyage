@@ -5,7 +5,21 @@
             <h1>Ajout d'un guide de voyage</h1>
 
             {{ form_start(form) }}
-            {{ form_widget(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.time) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.description) }}
+
+
+            <span>Image de voyage</span>
+            <div class="custom-file">
+                {{ form_row(form.imageFile) }}
+            </div>
+
+            {{ form_row(form.category) }}
+            {{ form_row(form.tags) }}
+
             <input type="submit" value="valider" class="btn btn-outline-info">
             {{ form_end(form) }}
 
