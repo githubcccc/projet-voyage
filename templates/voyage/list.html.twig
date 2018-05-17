@@ -4,8 +4,10 @@
     <main class="container">
         <h1>Les guides de voyage</h1>
 
+        {% for paquetDe3voyages in voyages|batch('3') %}
         <div class="row">
-            {%  for voyage in voyages %}
+
+            {%  for voyage in paquetDe3voyages %}
                 <div class="card col">
                     <div class="card-body">
                         <h4 class="card-title">
@@ -21,5 +23,6 @@
                 </div>
             {% endfor %}
         </div>
+        {% endfor %}
     </main>
 {% endblock %}

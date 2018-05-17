@@ -52,13 +52,16 @@ class User extends FOSParentUser
         return $this->identityUser;
     }
 
-    public function setIdentityUser(IdentityUser $identityUser): self
+    public function setIdentityUser(?IdentityUser $identityUser): self
     {
         $this->identityUser = $identityUser;
 
-        // set the owning side of the relation if necessary
-        if ($this !== $identityUser->getUser()) {
-            $identityUser->setUser($this);
+        if($identityUser) {
+            // set the owning side of the relation if necessary
+            if ($this !== $identityUser->getUser()) {
+                $identityUser->setUser($this);
+            }
+
         }
 
         return $this;
