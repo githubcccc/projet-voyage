@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h1>Édition d'une guide de voyage</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Modifier" class="btn btn-primary">
+        {{ form_end(form) }}
+    </main>
+{% endblock %}

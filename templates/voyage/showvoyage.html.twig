@@ -3,8 +3,11 @@
 	{% block body %}
         <main class = "container">
             <h1>{{voyage.name}}
-                <span class ="badge badge-pill badge-info" >{{p=voyage.price}} €</span></h1>
-            <span class ="badge badge-pill badge-info" >{{voyage.category.continent}} </span></h1>
+                <span class ="badge badge-pill badge-success" >{{voyage.price}} €</span></h1>
+            <span class ="badge badge-info" >{{voyage.category.continent}} </span></h1>
+            <p>{{ voyage.time }} Jours</p>
             <p> {{voyage.description}}</p>
+            <img class="card-img-top" src="{{ asset('img/voyage/'~voyage.imageName) }}" alt="{{ voyage.imageName }}">
+
         </main>
     {% endblock %}

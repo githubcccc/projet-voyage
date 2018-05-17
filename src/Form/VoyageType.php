@@ -16,7 +16,9 @@ class VoyageType extends AbstractType
             ->add('name')
             ->add('time')
             ->add('price')
-            ->add('imageFile', FileType::class)
+            ->add('imageFile', FileType::class, [
+                "label" => "Choisissez une image"
+            ])
             ->add('description')
            // ->add('user'/*,UserType::class*/)
             ->add('tags')

@@ -5,3 +5,4 @@ vich_uploader:
         voyage_img:
             uri_prefix: /img/voyage
             upload_destination: '%kernel.project_dir%/public/img/voyage'
+            #delete_on_remove: false

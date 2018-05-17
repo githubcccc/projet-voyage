@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-white text-white bg-dark">
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,7 +12,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">List</a>
+                <a class="nav-link" href="{{ path('app_voyage_list') }}">List</a>
             </li>
 
             <li class="nav-item">
@@ -20,11 +20,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link disabled" href="{{ path('app_category_add') }}">Ajourter category</a>
+                <a class="nav-link " href="{{ path('app_category_add') }}">Ajourter category</a>
             </li>
 
 			<li class="nav-item">
-                <a class="nav-link disabled" href="{{ path('app_tag_add') }}">Ajourter Tag</a>
+                <a class="nav-link" href="{{ path('app_tag_add') }}">Ajourter Tag</a>
             </li>
 
             <li class="nav-item dropdown">

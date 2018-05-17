@@ -24,14 +24,14 @@ class VoyageRepository extends ServiceEntityRepository
         $query =$this->createQueryBuilder('v')
             ->join('v.category','c')
             ->addSelect('c')
-            ->Where('c.id=:id')->setParameter(":id",$id)
+            ->Where('v.id=:id')->setParameter(":id",$id)
             ->getQuery()
         ;
         try{return $query->getOneOrNullResult();}
 
         catch(\Exception $e){
-            throw new\Exception('probleme dans ProductRepository::findOneWithCategory'.$e->getMessage().
-                var_dump($e));
+            throw new\Exception('probleme dans VoyageRepository::findOneWithCategory'.$e->getMessage()/*.
+                var_dump($e)*/);
         }
 
     }
