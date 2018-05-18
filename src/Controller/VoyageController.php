@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Voyage;
 use App\Form\VoyageType;
+use App\Repository\VoyageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +35,32 @@ class VoyageController extends Controller {
             "pagination" => $pagination
         ]);
     }
+
+    /**
+     * @Route("/voyage/category/{id}")
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
+    public function listByCategory(Request $request, int $id): Response
+    {
+        $query = $this->getDoctrine()
+            ->getRepository(Voyage::class)
+            ->findByCategory($id)
+        ;
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            12
+        );
+
+        return $this->render("voyage/list-by-categories.html.twig", [
+            "pagination" => $pagination
+        ]);
+    }
+
 
 
     /**

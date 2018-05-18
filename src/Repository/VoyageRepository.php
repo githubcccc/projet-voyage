@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Voyage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -30,11 +31,29 @@ class VoyageRepository extends ServiceEntityRepository
         try{return $query->getOneOrNullResult();}
 
         catch(\Exception $e){
-            throw new\Exception('probleme dans VoyageRepository::findOneWithCategory'.$e->getMessage()/*.
-                var_dump($e)*/);
+            //throw new\Exception('probleme dans VoyageRepository::findOneWithCategory'.$e->getMessage()/*.
+             //   var_dump($e)*/);
         }
 
     }
+
+    /**
+     * Récupère les voyages d'une catégorie donnée
+     * @param int $id
+     * @return Query (le use pour la Query ; use Doctrine\ORM\Query;)
+     */
+    public function findByCategory(int $id): Query
+    {
+        return $this->createQueryBuilder('v')
+            ->join('v.category', 'c')
+            ->addSelect('c')
+            ->where('v.category = :id')->setParameter(":id", $id)
+            ->getQuery()
+            ;
+    }
+
+
+
 
 //    /**
 //     * @return Voyage[] Returns an array of Voyage objects

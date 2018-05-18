@@ -1,19 +1,14 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <main class="container">
-        <h1>Les guides de voyage</h1>
-
-        {% for paquetDe3voyages in pagination|batch('3') %}
-        <div class="row">
-
-            {%  for voyage in paquetDe3voyages %}
-                <div class="card col">
+{% for paquetDe3voyages in pagination|batch('3') %}
+    <div class="row">
+        {%  for voyage in paquetDe3voyages %}
+            <div class="divimg">
+                <div class="card">
+                    {#<img class="card-img-top" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />#}
+                    <img class="card-img-top" src="{{ asset('img/voyage/'~voyage.imageName) }}" alt="{{ voyage.imageName }}">
                     <div class="card-body">
                         <h4 class="card-title">
                             {{ voyage.name }}
                         </h4>
-                        <p class="card-text">{{ voyage.description }}</p>
                         <p class="card-text">
                             <a href="{{ path('app_voyage_show', {id: voyage.id}) }}" class="btn btn-outline-info">Détail</a>
 
@@ -22,17 +17,11 @@
                             <a href="{{ path('app_voyage_delete', {id: voyage.id}) }}" class="btn btn-outline-danger">Supprimer</a>
                             {% endif %}
 
-                            <a href="#" class="btn btn-outline-info">Commentez-vous</a>
-
+                            <a href="{#{ path('', {id: voyage.id}) }#}" class="btn btn-outline-info">Commentez-vous</a>
                         </p>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
         {% endfor %}
-
-        <div class="navigation">
-            {{ knp_pagination_render(pagination) }}
-        </div>
-    </main>
-{% endblock %}
+    </div>
+{% endfor %}

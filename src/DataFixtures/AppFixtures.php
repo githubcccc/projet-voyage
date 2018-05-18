@@ -50,13 +50,13 @@ class AppFixtures extends Fixture
             "user" => function () {  return $this->userTMP; }
         ]);
 
-        //$populator->addEntity(Category::class, 10);
-        $populator->addEntity(Tag::class, 10);
+        $populator->addEntity(Category::class, 1);
+        $populator->addEntity(Tag::class, 5);
 
 
 
 
-        $populator->addEntity(Voyage::class, 80, [
+        $populator->addEntity(Voyage::class, 20, [
             "price" => function() use ($generator) {
                 return $generator->randomFloat(2, 0, 99999999.99);
             },
