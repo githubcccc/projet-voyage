@@ -16,17 +16,22 @@ class VoyageController extends Controller {
     /**
      * @Route("/voyages")
      */
-    public function list(): Response
+    public function list(Request $request): Response
     {
 
-        $voyages = $this
-            ->getDoctrine()
-            ->getRepository(Voyage::class)
-            ->findBy([], ["id" => "ASC"])
-        ;
-        // On retourne la vue en passant les produits
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT v FROM App:Voyage v";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            12
+        );
+
         return $this->render('voyage/list.html.twig', [
-            "voyages" => $voyages
+            "pagination" => $pagination
         ]);
     }
 

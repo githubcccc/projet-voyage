@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
             "user" => function () {  return $this->userTMP; }
         ]);
 
-        $populator->addEntity(Category::class, 10);
+        //$populator->addEntity(Category::class, 10);
         $populator->addEntity(Tag::class, 10);
 
 

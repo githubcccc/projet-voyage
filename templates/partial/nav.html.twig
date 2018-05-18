@@ -15,10 +15,13 @@
                 <a class="nav-link" href="{{ path('app_voyage_list') }}">List</a>
             </li>
 
+            {% if is_granted('ROLE_USER') %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_voyage_add') }}">Ajouter</a>
             </li>
+            {% endif %}
 
+            {% if is_granted('ROLE_MODERATEUR') %}
             <li class="nav-item">
                 <a class="nav-link " href="{{ path('app_category_add') }}">Ajourter category</a>
             </li>
@@ -26,6 +29,13 @@
 			<li class="nav-item">
                 <a class="nav-link" href="{{ path('app_tag_add') }}">Ajourter Tag</a>
             </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_admin_addrole') }}">Changer de Rôle</a>
+            </li>
+            {% endif %}
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,11 +52,13 @@
         </ul>
 
         <div>
+
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 Connecté en tant que {{  app.user.username }} |
                 <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
             {% else %}
-                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+
+                <a href="{{ path('fos_user_security_login') }}">Connexion</a><br><a href="{{ path('fos_user_registration_register') }}">Inscription</a>
             {% endif %}
         </div>
 
