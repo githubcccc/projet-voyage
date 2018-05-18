@@ -2,11 +2,18 @@
 
 {% block body %}
 <h1>Bienvenue à la page d'accueil</h1>
+<br>
 
+        <main  >
 
-        <main  class="float-right">
+            <div class="float-left">
+                <video controls src="video/Waterfall - 6998.mp4">
+                    video
+                </video>
 
+            </div>
 
+             <div class="float-right">
             <h2>Liste des catégories</h2>
             <ul class="list-group">
                 {% for category in categories %}
@@ -20,6 +27,7 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+             </div>
         </main>
 
 {% endblock %}

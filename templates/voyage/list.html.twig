@@ -22,7 +22,7 @@
                             <a href="{{ path('app_voyage_delete', {id: voyage.id}) }}" class="btn btn-outline-danger">Supprimer</a>
                             {% endif %}
 
-                            <a href="#" class="btn btn-outline-info">Commentez-vous</a>
+                            <a href="{{ path('app_voyage_comadd',{id:voyage.id }) }}" class="btn btn-outline-info">Commentez-vous</a>
 
                         </p>
                     </div>

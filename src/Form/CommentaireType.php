@@ -13,7 +13,7 @@ class CommentaireType extends AbstractType
     {
         $builder
             ->add('commentairetext')
-            ->add('voyage')
+            //->add('voyage')
         ;
     }
 

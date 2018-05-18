@@ -19,13 +19,19 @@ class VoyageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Voyage::class);
     }
-
+    //Dans voyageRepository on faire jointure à partir table voyage
     public function findOneWithCategory(int $id): ?Voyage
     {
-        $query =$this->createQueryBuilder('v')
-            ->join('v.category','c')
-            ->addSelect('c')
-            ->Where('v.id=:id')->setParameter(":id",$id)
+
+        $query =$this->createQueryBuilder('v') //alias 'v' sigifie table voyage
+            ->join('v.category','c')// jointure de table voyage et category  note c
+            ->addSelect('c')//ajoute la table c
+
+            ->setParameter(":id",$id)// recupere id de voyage que on veut
+            ->Where('v.id=:id')//on dit la condition que on veut :ici id de voyatge selectionné egale celui dans la  table
+
+            ->leftjoin('v.commentaires','co')//join pour les cote  leftjoin  on gared celui gauche et ajoute facultatifement droite  ici la table voyage est cote gauche
+            ->addSelect('co')
             ->getQuery()
         ;
         try{return $query->getOneOrNullResult();}

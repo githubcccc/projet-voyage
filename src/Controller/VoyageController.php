@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Voyage;
+use App\Form\CommentaireType;
 use App\Form\VoyageType;
-use App\Repository\VoyageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,6 +96,43 @@ class VoyageController extends Controller {
         ]);
     }
 
+
+    /**
+     * @Route("/voyage/ajoutcom/{id}")
+     * @param Request $request
+     * @return Response
+     */
+    public function comadd(Request/*Type*/ $request,int $id):Response
+    {
+        //récuperation du formulaire
+        $commentaire = new Commentaire(); //contient un objet vide
+        $form = $this->createForm(CommentaireType::class,$commentaire);
+
+        //vérification du formulaire
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $commentaire=$form->getData();
+            $voyage=$this->getDoctrine()->getRepository(Voyage::class)->find($id);
+            $commentaire->Setvoyage($voyage);
+            $manager =$this->getDoctrine()->getManager();
+            $manager->persist($commentaire);
+
+            //dump($commentaire);
+            //dump();
+           // die("stop");
+            $manager->flush();
+            return $this ->redirectToRoute('app_voyage_comadd',[
+                "id"=>$voyage->getId()
+            ]);
+        }
+
+        //sinon on revoie une vue avec la formulaire
+        return $this->render("voyage/ajoutecom.html.twig",[
+            "form" => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/show/{id}")
      * @param Request $request
@@ -104,6 +142,9 @@ class VoyageController extends Controller {
     public function show(int $id):Response
     {
         $voyage=$this->getDoctrine()->getRepository(Voyage::class)->findOneWithCategory($id);
+
+        //dump($voyage);
+        //die("stop");
 
         return $this->render("voyage/showvoyage.html.twig",[
             "voyage"=>$voyage

@@ -9,5 +9,9 @@
             <p> {{voyage.description}}</p>
             <img class="card-img-top" src="{{ asset('img/voyage/'~voyage.imageName) }}" alt="{{ voyage.imageName }}">
 
+            {%  for commentaire in voyage.commentaires %}
+                <p class="border card-body card-text">{{ commentaire.commentairetext }}</p>
+            {% endfor %}
+
         </main>
     {% endblock %}
